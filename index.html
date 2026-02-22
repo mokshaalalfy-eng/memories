@@ -38,6 +38,7 @@ padding:12px;
 border:none;
 border-radius:10px;
 margin:10px;
+font-size:16px;
 }
 
 button{
@@ -48,16 +49,16 @@ cursor:pointer;
 background:white;
 color:black;
 margin-top:10px;
+font-size:16px;
 }
 
 .page{
 display:none;
 padding:30px;
-background:url("second-bg.jpg") center/cover fixed;
 }
 
 .card{
-background:rgba(0,0,0,0.5);
+background:rgba(0,0,0,0.6);
 padding:20px;
 border-radius:15px;
 margin:20px auto;
@@ -86,9 +87,8 @@ cursor:pointer;
 <!-- LOGIN -->
 <div id="login" class="center">
 <img src="login.jpg">
-
 <h2>ادخل الباسورد يا اخويا 👑</h2>
-<input type="password" id="pass">
+<input type="password" id="pass" placeholder="اكتب الباسورد">
 <button onclick="checkPass()">دخول</button>
 </div>
 
@@ -122,7 +122,9 @@ cursor:pointer;
 
 <script>
 function checkPass(){
-if(document.getElementById("pass").value=="2622005"){
+var entered = document.getElementById("pass").value.trim();
+
+if(entered === "2622005"){
 document.getElementById("login").style.display="none";
 document.getElementById("main").style.display="block";
 }else{
@@ -137,3 +139,7 @@ document.getElementById("answerResult").innerHTML="ربنا يديمنا لبع�
 document.getElementById("answerResult").innerHTML="ركز يا معفن 😂";
 }
 }
+</script>
+
+</body>
+</html>
