@@ -9,33 +9,28 @@
 body{
 margin:0;
 font-family:Arial;
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
 color:white;
 text-align:center;
-transition:1s;
-}
-
-.page{
-display:none;
-padding:40px 20px;
-animation:fade 1s ease-in-out;
-}
-
-@keyframes fade{
-from{opacity:0;}
-to{opacity:1;}
 }
 
 .center{
+position:relative;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-height:100vh;
-background:url("login-bg.jpg") center/cover no-repeat;
-backdrop-filter:blur(3px);
+overflow:hidden;
+}
+
+.center img{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-1;
 }
 
 input{
@@ -55,13 +50,18 @@ color:black;
 margin-top:10px;
 }
 
+.page{
+display:none;
+padding:30px;
+background:url("second-bg.jpg") center/cover fixed;
+}
+
 .card{
 background:rgba(0,0,0,0.5);
 padding:20px;
 border-radius:15px;
 margin:20px auto;
 max-width:500px;
-backdrop-filter:blur(5px);
 }
 
 .img-box{
@@ -124,13 +124,15 @@ cursor:pointer;
 
 <!-- LOGIN -->
 <div id="login" class="center">
+<img src="٢٠٢٦-٠٢-٢٢T٠٣١٨٣٥.٧٠٩.jpeg">
+
 <h2>ادخل الباسورد يا اخويا 👑</h2>
 <input type="password" id="pass">
 <button onclick="checkPass()">دخول</button>
 </div>
 
-<!-- MAIN PAGE -->
-<div id="main" class="page" style="background:url('second-bg.jpg') center/cover fixed;">
+<!-- MAIN -->
+<div id="main" class="page">
 
 <h1>اخويا ورفيق عمري ❤️</h1>
 
@@ -157,65 +159,23 @@ cursor:pointer;
 
 <h2>طبعا دا جزء من ذكرياتنا وربنا يديم الفضايح 😂❤️</h2>
 
-<!-- الصور بقفل -->
+<!-- مثال صورة بقفل -->
 <div class="img-box">
 <img src="photo1.jpg" style="filter:blur(10px)" id="img1">
 <div class="lock" onclick="unlock(1)">🔒</div>
 <p>ملقتش حاجه احسن من كد ابدأ بيها 😂❤️</p>
 </div>
 
-<div class="img-box">
-<img src="photo2.jpg" style="filter:blur(10px)" id="img2">
-<div class="lock" onclick="unlock(2)">🔒</div>
-<p>مالك ومالى يا دنيا 😂❤️</p>
-</div>
-
-<div class="img-box">
-<img src="photo3.jpg" style="filter:blur(10px)" id="img3">
-<div class="lock" onclick="unlock(3)">🔒</div>
-<p>مكمل سعي رغم الصعوبات 😂❤️</p>
-</div>
-
-<!-- صور عادية -->
-<img src="photo4.jpg">
-<p>احلى تونز يعم ❤️</p>
-
-<img src="photo5.jpg">
-<p>ابيض ع الابيض 😂❤️</p>
-
-<img src="photo6.jpg">
-<p>احلى من يتم ٢١ يعم 😉❤️</p>
-
-<img src="photo7.jpg">
-<p>اوعا الفحت لتقع تحت 😂❤️</p>
-
-<img src="photo8.jpg">
-<p>اخيرا وليس اخرا 😂❤️</p>
-
-<!-- فيديوهات -->
-<video controls src="video1.mp4"></video>
-<p>احلى فخاد دي 😂❤️</p>
-
-<video controls src="video2.mp4"></video>
-<p>احلى من ينجح وهو نايم 😂❤️</p>
-
-<video controls src="video3.mp4"></video>
-<p>اوعا الباي والتراي 😂❤️</p>
-
-<video controls src="video4.mp4"></video>
-<p>اوعا تنسي نصيحتي 😂</p>
-
+<!-- زر النهاية -->
 <div class="final-btn" onclick="showFinal()">
 اضغط هنا يا اخويا خلصنا خلاص ❤️
 </div>
 
 </div>
 
-<!-- FINAL PAGE -->
+<!-- FINAL -->
 <div id="final" class="page">
-
 <img src="final.jpg" style="width:90%;max-width:400px;border-radius:20px;">
-
 <div class="card">
 واخيرا حبيت اقولك كل سنه وانت طيب بس بطريقتي  
 انت عارف بقا ابو السيد طول عمره يحب الاختلاف 😎  
@@ -223,7 +183,6 @@ cursor:pointer;
 وسنه سعيده عليك وانت محقق كل اللى نفسك فيه  
 ودائما يارب اللي الله اقرب وعلى طاعته ادوم ❤️
 </div>
-
 </div>
 
 <script>
@@ -245,7 +204,7 @@ function checkAnswer(x){
 if(x==1){
 document.getElementById("answerResult").innerHTML="ربنا يديمنا لبعض العمر كله ❤️";
 }else{
-document.getElementById("answerResult").innerHTML="غلط يا حبيبي ركز 😂";
+document.getElementById("answerResult").innerHTML="ركز يا معفن 😂";
 }
 }
 
