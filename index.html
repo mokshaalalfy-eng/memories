@@ -64,29 +64,6 @@ margin:20px auto;
 max-width:500px;
 }
 
-.img-box{
-position:relative;
-margin:20px auto;
-max-width:350px;
-}
-
-.img-box img{
-width:100%;
-border-radius:15px;
-}
-
-.lock{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-font-size:40px;
-cursor:pointer;
-background:rgba(0,0,0,0.6);
-padding:20px;
-border-radius:50%;
-}
-
 .options{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -101,22 +78,6 @@ padding:15px;
 border-radius:10px;
 cursor:pointer;
 }
-
-video{
-width:90%;
-max-width:400px;
-margin:20px auto;
-border-radius:15px;
-}
-
-.final-btn{
-margin-top:40px;
-background:white;
-color:black;
-padding:15px;
-border-radius:15px;
-cursor:pointer;
-}
 </style>
 </head>
 
@@ -124,7 +85,7 @@ cursor:pointer;
 
 <!-- LOGIN -->
 <div id="login" class="center">
-<img src="٢٠٢٦-٠٢-٢٢T٠٣١٨٣٥.٧٠٩.jpeg">
+<img src="login.jpg">
 
 <h2>ادخل الباسورد يا اخويا 👑</h2>
 <input type="password" id="pass">
@@ -157,32 +118,6 @@ cursor:pointer;
 
 <p id="answerResult"></p>
 
-<h2>طبعا دا جزء من ذكرياتنا وربنا يديم الفضايح 😂❤️</h2>
-
-<!-- مثال صورة بقفل -->
-<div class="img-box">
-<img src="photo1.jpg" style="filter:blur(10px)" id="img1">
-<div class="lock" onclick="unlock(1)">🔒</div>
-<p>ملقتش حاجه احسن من كد ابدأ بيها 😂❤️</p>
-</div>
-
-<!-- زر النهاية -->
-<div class="final-btn" onclick="showFinal()">
-اضغط هنا يا اخويا خلصنا خلاص ❤️
-</div>
-
-</div>
-
-<!-- FINAL -->
-<div id="final" class="page">
-<img src="final.jpg" style="width:90%;max-width:400px;border-radius:20px;">
-<div class="card">
-واخيرا حبيت اقولك كل سنه وانت طيب بس بطريقتي  
-انت عارف بقا ابو السيد طول عمره يحب الاختلاف 😎  
-كل سنه وانت طيب يا نور عيني  
-وسنه سعيده عليك وانت محقق كل اللى نفسك فيه  
-ودائما يارب اللي الله اقرب وعلى طاعته ادوم ❤️
-</div>
 </div>
 
 <script>
@@ -195,11 +130,6 @@ alert("غلط يا نجم 😂");
 }
 }
 
-function unlock(num){
-document.getElementById("img"+num).style.filter="blur(0px)";
-event.target.style.display="none";
-}
-
 function checkAnswer(x){
 if(x==1){
 document.getElementById("answerResult").innerHTML="ربنا يديمنا لبعض العمر كله ❤️";
@@ -207,12 +137,3 @@ document.getElementById("answerResult").innerHTML="ربنا يديمنا لبع�
 document.getElementById("answerResult").innerHTML="ركز يا معفن 😂";
 }
 }
-
-function showFinal(){
-document.getElementById("main").style.display="none";
-document.getElementById("final").style.display="block";
-}
-</script>
-
-</body>
-</html>
