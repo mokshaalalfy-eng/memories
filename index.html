@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ذكرياتنا ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background: linear-gradient(135deg,#ff4e50,#fc913a);
+text-align:center;
+color:white;
+}
+
+#login{
+margin-top:40%;
+}
+
+input{
+padding:12px;
+border:none;
+border-radius:10px;
+width:200px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:black;
+color:white;
+cursor:pointer;
+margin-top:10px;
+}
+
+#content{
+display:none;
+padding:20px;
+}
+
+img{
+width:250px;
+border-radius:15px;
+margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="login">
+<h2>ادخل الباسورد 💌</h2>
+<input type="password" id="pass" placeholder="الباسورد">
+<br>
+<button onclick="check()">دخول</button>
+</div>
+
+<div id="content">
+<h1>ذكرياتنا الجميلة ❤️</h1>
+<p>اكتب هنا أي كلام تحبه...</p>
+
+<img src="https://via.placeholder.com/250">
+<p>تقدر تغير الصورة دي وتحط صورتكم ❤️</p>
+
+</div>
+
+<script>
+function check(){
+var password = document.getElementById("pass").value;
+
+if(password === "love123"){
+document.getElementById("login").style.display="none";
+document.getElementById("content").style.display="block";
+}
+else{
+alert("الباسورد غلط ❌");
+}
+}
+</script>
+
+</body>
+</html>
