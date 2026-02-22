@@ -9,135 +9,273 @@
 body{
 margin:0;
 font-family:Arial;
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 color:white;
 text-align:center;
+transition:0.5s;
 }
 
-.center{
-position:relative;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-}
-
-.center img{
+.overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-object-fit:cover;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(0px);
+transition:0.5s;
 z-index:-1;
+}
+
+.login-box{
+margin-top:40vh;
 }
 
 input{
 padding:12px;
 border:none;
 border-radius:10px;
-margin:10px;
-font-size:16px;
+width:200px;
 }
 
 button{
-padding:10px 20px;
+padding:12px 25px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 cursor:pointer;
-background:white;
-color:black;
 margin-top:10px;
 font-size:16px;
 }
 
-.page{
-display:none;
-padding:30px;
-}
+.hidden{display:none;}
 
 .card{
-background:rgba(0,0,0,0.6);
-padding:20px;
-border-radius:15px;
-margin:20px auto;
+margin:30px auto;
+width:90%;
 max-width:500px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:15px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
-.options{
+.card img, video{
+width:100%;
+border-radius:15px;
+}
+
+.lock{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:40px;
+cursor:pointer;
+}
+
+.memory{
+position:relative;
+margin-bottom:30px;
+}
+
+.option-box{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:15px;
-max-width:400px;
+max-width:500px;
 margin:20px auto;
 }
 
 .option{
-background:rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.15);
 padding:15px;
-border-radius:10px;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.option:hover{
+background:rgba(255,255,255,0.3);
+}
+
+.success-msg, .fail-msg{
+margin-top:15px;
+font-weight:bold;
+display:none;
+}
+
+.success-msg{
+color:#00ffcc;
+}
+
+.fail-msg{
+color:#ff4d4d;
+}
+
+.final-btn{
+background:white;
+color:black;
+padding:15px;
+border-radius:20px;
+margin:40px auto;
+width:80%;
+max-width:400px;
 cursor:pointer;
 }
 </style>
 </head>
 
-<body>
+<body style="background-image:url('login.jpg');">
 
-<!-- LOGIN -->
-<div id="login" class="center">
-<img src="login.jpg">
-<h2>ادخل الباسورد يا اخويا 👑</h2>
-<input type="password" id="pass" placeholder="اكتب الباسورد">
+<div class="overlay"></div>
+
+<div id="login" class="login-box">
+<h2>ادخل الباسورد 💌</h2>
+<input type="password" id="pass">
+<br>
 <button onclick="checkPass()">دخول</button>
 </div>
 
-<!-- MAIN -->
-<div id="main" class="page">
+<div id="content" class="hidden">
 
-<h1>اخويا ورفيق عمري ❤️</h1>
+<h1>أخويا ورفيق عمري 👑</h1>
 
 <div class="card">
-اخويا وحبيب قلبي وعشرة عمري كل سنه وانت دايما جنبي  
-كل سنه وانت دايما ف ضهري  
-كل سنه واحنا قارفين بعض دايما 😂  
-كل سنه وانت محقق كل اللى ف نفسك فيه  
-كل سنه واحنا دايما ف ضهر بعض  
-يا اجمل اخ ف الدنيا ❤️  
-ربنا يديمك ف حياتي ويديمنا سند لبعض
+<p>💌 اضغط للفتح</p>
+<button onclick="openLetter()">فتح الرسالة</button>
 </div>
 
-<h3>بقالنا قد اي مع بعض ولسا مكملين ؟</h3>
-
-<div class="options">
-<div class="option" onclick="checkAnswer(1)">أولي اعدادي</div>
-<div class="option" onclick="checkAnswer(2)">أولي ابتدائي</div>
-<div class="option" onclick="checkAnswer(3)">أولي ثانوي</div>
-<div class="option" onclick="checkAnswer(4)">أولي كليه</div>
+<div id="letter" class="card hidden">
+<p>
+أخويا وحبيب قلبي وعشرة عمري 🤍<br><br>
+كل سنة وانت دايمًا جنبي<br>
+كل سنة وانت دايمًا في ضهري<br>
+كل سنة واحنا قارفين بعض دايمًا 😂<br><br>
+كل سنة وانت محقق كل اللي في نفسك فيه<br>
+كل سنة واحنا دايمًا في ضهر بعض<br><br>
+يا أجمل أخ في الدنيا 🤍<br><br>
+حقيقي انت أخويا اللي مجابتهوش أمي<br>
+ربنا يديمك في حياتي ويديمنا سند لبعض 🤲✨
+</p>
 </div>
 
-<p id="answerResult"></p>
+<h2>بقالنا قد إيه مع بعض ولسه مكملين؟</h2>
+
+<div class="option-box">
+<div class="option" onclick="wrong()">أولى ابتدائي</div>
+<div class="option" onclick="correct()">أولى إعدادي</div>
+<div class="option" onclick="wrong()">أولى ثانوي</div>
+<div class="option" onclick="wrong()">أولى كلية</div>
+</div>
+
+<div class="success-msg" id="success">ربنا يديمنا لبعض العمر كله 🤍</div>
+<div class="fail-msg" id="fail">ركز يا معفن 😂</div>
+
+<h2 style="margin-top:40px;">طبعًا ده جزء من ذكرياتنا… وربنا يديم الفضايح 😂</h2>
+
+<!-- أول 3 بقفل -->
+<div class="memory">
+<div class="card">
+<div class="lock" onclick="unlock(this)">🔒</div>
+<img src="image1.jpg">
+<p>ملقتش حاجه أحسن من كده أبدأ بيها 😂❤️</p>
+</div>
+</div>
+
+<div class="memory">
+<div class="card">
+<div class="lock" onclick="unlock(this)">🔒</div>
+<img src="image2.jpg">
+<p>مالك ومالي يا دنيا 😂❤️</p>
+</div>
+</div>
+
+<div class="memory">
+<div class="card">
+<div class="lock" onclick="unlock(this)">🔒</div>
+<img src="image3.jpg">
+<p>مكمل سعي رغم الصعوبات 😂❤️</p>
+</div>
+</div>
+
+<!-- بدون قفل -->
+<div class="card">
+<img src="image4.jpg">
+<p>أحلى تونز يا عم ❤️</p>
+</div>
+
+<div class="card">
+<img src="image5.jpg">
+<p>أبيض ع الأبيض 😂❤️</p>
+</div>
+
+<div class="card">
+<img src="image6.jpg">
+<p>أحلى من يتم ٢١ يا عم 😉❤️</p>
+</div>
+
+<div class="card">
+<img src="image7.jpg">
+<p>أوعى الفحت لتقع تحت 😂❤️</p>
+</div>
+
+<div class="card">
+<img src="image8.jpg">
+<p>أخيرًا وليس آخرًا 😂❤️</p>
+</div>
+
+<div class="final-btn" onclick="scrollToEnd()">
+اضغط هنا يا أخويا خلصنا خلاص ❤️
+</div>
+
+<div id="finalSection" class="card hidden">
+<img src="finalimage.jpg">
+<p>
+وأخيرًا حبيت أقولك كل سنة وانت طيب… بس بطريقتي ❤️<br><br>
+كل سنة وانت طيب يا نور عيني<br>
+وسنة سعيدة عليك وانت محقق كل اللي نفسك فيه<br>
+ودائمًا يا رب إلى الله أقرب وعلى طاعته أدوم ❤️
+</p>
+</div>
 
 </div>
 
 <script>
 function checkPass(){
-var entered = document.getElementById("pass").value.trim();
-
-if(entered === "2622005"){
-document.getElementById("login").style.display="none";
-document.getElementById("main").style.display="block";
-}else{
-alert("غلط يا نجم 😂");
+if(document.getElementById("pass").value.trim()==="2622005"){
+document.getElementById("login").classList.add("hidden");
+document.getElementById("content").classList.remove("hidden");
+document.body.style.backgroundImage="url('second.jpg')";
+}
+else{
+alert("الباسورد غلط ❌");
 }
 }
 
-function checkAnswer(x){
-if(x==1){
-document.getElementById("answerResult").innerHTML="ربنا يديمنا لبعض العمر كله ❤️";
-}else{
-document.getElementById("answerResult").innerHTML="ركز يا معفن 😂";
+function openLetter(){
+document.getElementById("letter").classList.remove("hidden");
 }
+
+function correct(){
+document.getElementById("success").style.display="block";
+document.getElementById("fail").style.display="none";
+}
+
+function wrong(){
+document.getElementById("fail").style.display="block";
+document.getElementById("success").style.display="none";
+}
+
+function unlock(lock){
+lock.style.display="none";
+}
+
+function scrollToEnd(){
+document.getElementById("finalSection").classList.remove("hidden");
+document.getElementById("finalSection").scrollIntoView({behavior:"smooth"});
 }
 </script>
 
