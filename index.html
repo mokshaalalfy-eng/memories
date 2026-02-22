@@ -9,62 +9,61 @@
 body{
 margin:0;
 font-family:Arial;
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
+background:url("login.jpg") center/cover fixed;
 color:white;
 text-align:center;
-transition:0.5s;
+transition:0.6s;
 }
 
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(0px);
-transition:0.5s;
-z-index:-1;
+.hidden{display:none;}
+
+/* Fade + Slide */
+.fade-up{
+opacity:0;
+transform:translateY(30px);
+animation:fadeUp 1s forwards;
+}
+@keyframes fadeUp{
+to{opacity:1; transform:translateY(0);}
 }
 
 .login-box{
 margin-top:40vh;
+animation:fadeUp 1s forwards;
 }
 
-input{
+input,button{
 padding:12px;
 border:none;
 border-radius:10px;
-width:200px;
+margin-top:10px;
 }
 
 button{
-padding:12px 25px;
-border:none;
-border-radius:12px;
 cursor:pointer;
-margin-top:10px;
-font-size:16px;
 }
-
-.hidden{display:none;}
 
 .card{
 margin:30px auto;
 width:90%;
 max-width:500px;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
-padding:15px;
+background:rgba(0,0,0,0.6);
+padding:20px;
 border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+backdrop-filter:blur(8px);
+animation:fadeUp 1s forwards;
 }
 
-.card img, video{
+.card img{
 width:100%;
 border-radius:15px;
+transition:0.5s;
+}
+
+/* Lock */
+.memory{
+position:relative;
+margin-bottom:30px;
 }
 
 .lock{
@@ -72,15 +71,19 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-font-size:40px;
+font-size:45px;
 cursor:pointer;
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:50%;
+transition:0.4s;
 }
 
-.memory{
-position:relative;
-margin-bottom:30px;
+.blur{
+filter:blur(12px);
 }
 
+/* Options */
 .option-box{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -90,7 +93,8 @@ margin:20px auto;
 }
 
 .option{
-background:rgba(255,255,255,0.15);
+background:white;
+color:black;
 padding:15px;
 border-radius:15px;
 cursor:pointer;
@@ -98,22 +102,17 @@ transition:0.3s;
 }
 
 .option:hover{
-background:rgba(255,255,255,0.3);
+transform:scale(1.05);
 }
 
-.success-msg, .fail-msg{
+.success-msg,.fail-msg{
+display:none;
 margin-top:15px;
 font-weight:bold;
-display:none;
 }
 
-.success-msg{
-color:#00ffcc;
-}
-
-.fail-msg{
-color:#ff4d4d;
-}
+.success-msg{color:#00ffcc;}
+.fail-msg{color:#ff4d4d;}
 
 .final-btn{
 background:white;
@@ -124,13 +123,22 @@ margin:40px auto;
 width:80%;
 max-width:400px;
 cursor:pointer;
+transition:0.3s;
+}
+
+.final-btn:hover{
+transform:scale(1.05);
+}
+
+/* Floating hearts */
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-100vh);opacity:0;}
 }
 </style>
 </head>
 
-<body style="background-image:url('login.jpg');">
-
-<div class="overlay"></div>
+<body>
 
 <div id="login" class="login-box">
 <h2>ادخل الباسورد 💌</h2>
@@ -139,17 +147,15 @@ cursor:pointer;
 <button onclick="checkPass()">دخول</button>
 </div>
 
-<div id="content" class="hidden">
+<div id="content" class="hidden fade-up">
 
 <h1>أخويا ورفيق عمري 👑</h1>
 
 <div class="card">
-<p>💌 اضغط للفتح</p>
-<button onclick="openLetter()">فتح الرسالة</button>
+<button onclick="openLetter()">💌 اضغط لفتح الرسالة</button>
 </div>
 
 <div id="letter" class="card hidden">
-<p>
 أخويا وحبيب قلبي وعشرة عمري 🤍<br><br>
 كل سنة وانت دايمًا جنبي<br>
 كل سنة وانت دايمًا في ضهري<br>
@@ -159,7 +165,6 @@ cursor:pointer;
 يا أجمل أخ في الدنيا 🤍<br><br>
 حقيقي انت أخويا اللي مجابتهوش أمي<br>
 ربنا يديمك في حياتي ويديمنا سند لبعض 🤲✨
-</p>
 </div>
 
 <h2>بقالنا قد إيه مع بعض ولسه مكملين؟</h2>
@@ -174,70 +179,50 @@ cursor:pointer;
 <div class="success-msg" id="success">ربنا يديمنا لبعض العمر كله 🤍</div>
 <div class="fail-msg" id="fail">ركز يا معفن 😂</div>
 
-<h2 style="margin-top:40px;">طبعًا ده جزء من ذكرياتنا… وربنا يديم الفضايح 😂</h2>
+<h2 style="margin-top:40px;">طبعًا ده جزء من ذكرياتنا 😂</h2>
 
 <!-- أول 3 بقفل -->
 <div class="memory">
 <div class="card">
-<div class="lock" onclick="unlock(this)">🔒</div>
-<img src="image1.jpg">
+<img src="image1.jpg" id="img1" class="blur">
+<div class="lock" onclick="unlock('img1',this)">🔒</div>
 <p>ملقتش حاجه أحسن من كده أبدأ بيها 😂❤️</p>
 </div>
 </div>
 
 <div class="memory">
 <div class="card">
-<div class="lock" onclick="unlock(this)">🔒</div>
-<img src="image2.jpg">
+<img src="image2.jpg" id="img2" class="blur">
+<div class="lock" onclick="unlock('img2',this)">🔒</div>
 <p>مالك ومالي يا دنيا 😂❤️</p>
 </div>
 </div>
 
 <div class="memory">
 <div class="card">
-<div class="lock" onclick="unlock(this)">🔒</div>
-<img src="image3.jpg">
+<img src="image3.jpg" id="img3" class="blur">
+<div class="lock" onclick="unlock('img3',this)">🔒</div>
 <p>مكمل سعي رغم الصعوبات 😂❤️</p>
 </div>
 </div>
 
-<!-- بدون قفل -->
-<div class="card">
-<img src="image4.jpg">
-<p>أحلى تونز يا عم ❤️</p>
-</div>
+<!-- باقي الصور -->
+<div class="card"><img src="image4.jpg"><p>أحلى تونز ❤️</p></div>
+<div class="card"><img src="image5.jpg"><p>أبيض ع الأبيض 😂❤️</p></div>
+<div class="card"><img src="image6.jpg"><p>أحلى من يتم ٢١ 😉❤️</p></div>
+<div class="card"><img src="image7.jpg"><p>أوعى الفحت لتقع تحت 😂❤️</p></div>
+<div class="card"><img src="image8.jpg"><p>أخيرًا وليس آخرًا 😂❤️</p></div>
 
-<div class="card">
-<img src="image5.jpg">
-<p>أبيض ع الأبيض 😂❤️</p>
-</div>
-
-<div class="card">
-<img src="image6.jpg">
-<p>أحلى من يتم ٢١ يا عم 😉❤️</p>
-</div>
-
-<div class="card">
-<img src="image7.jpg">
-<p>أوعى الفحت لتقع تحت 😂❤️</p>
-</div>
-
-<div class="card">
-<img src="image8.jpg">
-<p>أخيرًا وليس آخرًا 😂❤️</p>
-</div>
-
-<div class="final-btn" onclick="scrollToEnd()">
+<div class="final-btn" onclick="showFinal()">
 اضغط هنا يا أخويا خلصنا خلاص ❤️
 </div>
 
 <div id="finalSection" class="card hidden">
-<img src="finalimage.jpg">
+<img src="final.jpg">
 <p>
-وأخيرًا حبيت أقولك كل سنة وانت طيب… بس بطريقتي ❤️<br><br>
-كل سنة وانت طيب يا نور عيني<br>
-وسنة سعيدة عليك وانت محقق كل اللي نفسك فيه<br>
-ودائمًا يا رب إلى الله أقرب وعلى طاعته أدوم ❤️
+وأخيرًا حبيت أقولك كل سنة وانت طيب ❤️<br><br>
+سنة سعيدة عليك وانت محقق كل اللي نفسك فيه<br>
+ودائمًا إلى الله أقرب وعلى طاعته أدوم ❤️
 </p>
 </div>
 
@@ -248,15 +233,16 @@ function checkPass(){
 if(document.getElementById("pass").value.trim()==="2622005"){
 document.getElementById("login").classList.add("hidden");
 document.getElementById("content").classList.remove("hidden");
-document.body.style.backgroundImage="url('second.jpg')";
-}
-else{
+document.body.style.background="url('second.jpg') center/cover fixed";
+}else{
 alert("الباسورد غلط ❌");
 }
 }
 
 function openLetter(){
-document.getElementById("letter").classList.remove("hidden");
+let letter=document.getElementById("letter");
+letter.classList.remove("hidden");
+letter.classList.add("fade-up");
 }
 
 function correct(){
@@ -269,14 +255,31 @@ document.getElementById("fail").style.display="block";
 document.getElementById("success").style.display="none";
 }
 
-function unlock(lock){
-lock.style.display="none";
+function unlock(id,el){
+document.getElementById(id).classList.remove("blur");
+el.style.transform="translate(-50%,-50%) scale(0)";
+setTimeout(()=>{el.style.display="none";},400);
 }
 
-function scrollToEnd(){
-document.getElementById("finalSection").classList.remove("hidden");
-document.getElementById("finalSection").scrollIntoView({behavior:"smooth"});
+function showFinal(){
+let sec=document.getElementById("finalSection");
+sec.classList.remove("hidden");
+sec.classList.add("fade-up");
+sec.scrollIntoView({behavior:"smooth"});
 }
+
+/* Floating hearts */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.style.position="fixed";
+heart.style.left=Math.random()*100+"vw";
+heart.style.bottom="0";
+heart.style.fontSize="20px";
+heart.style.animation="floatUp 3s linear";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},3000);
+},2000);
 </script>
 
 </body>
